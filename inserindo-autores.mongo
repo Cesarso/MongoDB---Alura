@@ -1,0 +1,10 @@
+
+
+
+
+db.autores.insert({
+    nome: "Gabriel Ferreira",
+    descrição: "Desenvolvedor, instrutor e criador de conteúdo na CS sistemas",
+    email: "gabs@gmail.com",
+    senha: "1234"
+})

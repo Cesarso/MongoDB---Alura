@@ -1,0 +1,247 @@
+
+ 
+
+db.createCollection("alunos")
+db.alunos.insert(
+    {
+        "nome": "Felipe",
+        "data_nascimento" : ISODate("1994,04,10"),
+        "curso" : {
+            "nome" : "Sistemas de Informação"
+        },
+        "notas" : [10.0, 9.0, 4.5],
+        "habilidades" : [
+            {
+                "nome" : "inglês",
+                "nível" : "avançado"
+
+            },
+            {
+                "nome": "taekwondo",
+                "nível": "básico"
+            }
+        ]
+    }
+
+)
+
+db.alunos.find()
+
+db.alunos.remove({
+    "_id": {
+      "$oid": "60d3706cfbdac5321009c04a"
+    }
+})
+
+
+db.alunos.insert({
+    "nome": "Julio",
+    "data_nascimento": ISODate("1972,08,30"),
+    "curso": {
+        "nome":"Medicina"
+    },
+    "habilidades":[{
+        "nome": "inglês",
+        "nível": "avançado"
+
+    }]
+})
+
+db.alunos.insert({
+    "nome": "Alberto",
+    "data_nascimento": ISODate("1972,09,30"),
+    "curso": {
+        "nome":"Engenharia Quimica"
+    },
+    "habilidades":[{
+        "nome": "inglês",
+        "nível": "intermediário"
+
+    }]
+})
+
+
+db.alunos.insert({
+    "nome": "Daniela",
+    "data_nascimento": ISODate("1995,09,30"),
+    "curso": {
+        "nome":"Moda"
+    },
+    "habilidades":[{
+        "nome": "Alemão",
+        "nível": "Básico"
+
+    }]
+
+})
+
+db.alunos.find().pretty()
+
+db.alunos.find(
+    {
+        "nome": "Felipe"
+    }
+    
+).pretty()
+
+
+db.alunos.insert({
+    "nome": "Felipe",
+    "curso": {
+        "nome": "Matemática"
+    }
+})
+
+db.alunos.find({"nome":"Felipe"})
+
+db.alunos.remove({"_id": {
+      "$oid": "60d38149fbdac5321009c04f"}})
+
+db.alunos.find({
+    "habilidades.nome": "inglês"
+})
+
+
+
+db.alunos.find({
+    "nome": "Felipe",
+    "habilidades.nome": "inglês"
+})
+
+db.alunos.find({
+    $or: [
+        {"curso.nome": "Sistemas de Informação"},
+        {"curso.nome": "Engenharia Quimica"}
+    ]
+}
+
+)
+
+
+db.alunos.find({
+    $or: [
+        {"curso.nome": "Sistemas de Informação"},
+        {"curso.nome": "Engenharia Quimica"},
+        {"curso.nome": "Moda"}
+    ],
+    "nome": "Daniela"
+
+}
+
+)
+
+db.alunos.find({
+    "curso.nome" : {
+        $in:[
+            "Sistemas de Informação", "Engenharia Quimica"
+        ]
+    }
+})
+
+
+db.alunos.insert({
+    nome : "Fernando",
+    data_nascimento : ISODate("1994,03,26"),
+    notas : [10, 4.5, 7],
+    curso:{
+        nome: "sistema de informação"
+    }
+})
+
+db.alunos.update(
+    {"curso.nome":"Sistemas de Informação"},
+    {
+    $set:{
+        "curso.nome":"Sistemas De Informação"
+        }
+        
+    },{multi: true}
+)
+
+db.alunos.find()
+
+
+db.alunos.update(
+     {"_id": ObjectId("60d394c4fbdac5321009c050")
+    },
+    {
+        $push: {
+            "notas": 8.5
+        }
+    }
+
+)
+
+db.alunos.update(
+    {"_id": ObjectId("60d394c4fbdac5321009c050")},
+
+    {
+        $push:{
+            notas:{
+                $each:[8.5, 3]
+            }
+        }
+    }
+    )
+
+db.alunos.find({
+    notas: {$gt : 5}
+})
+
+db.alunos.insert({
+    nome: "André",
+    data_nascimento: ISODate("1991,01,25"),
+    curso :{
+        nome: "Matemática"
+    },
+    notas : [7, 5, 9, 4.5]
+})
+
+db.alunos.find({
+    notas: {$gt : 5}
+})
+
+db.alunos.insert({
+    nome: "Lucia",
+    data_nascimento: ISODate("1984,07,17"),
+    curso :{
+        nome: "Matemática"
+    },
+    notas : [8, 9.5,10]
+})
+
+db.alunos.findOne({
+    notas: {$gt : 5}
+})
+
+db.alunos.find().sort({"nome":-1})
+
+
+
+db.alunos.find().sort({"nome":-1}).limit(3)
+
+
+db.alunos.find({
+    notas: {$lt : 5}
+})
+
+
+db.alunos.update(
+{"_id": ObjectId("60d3735cfbdac5321009c04b")},
+{
+    $set:{
+        localizacao: "Rua Vergueiro, 3185",
+        cidade: "São Paulo",
+        coordinates : [-23.588190, -46.632320],
+        type: "Point"
+    },
+    distanceField : "distancia.calculada",
+    spherical : true
+}
+
+)
+
+db.alunos.createIndex({
+    localizacao : "2dsphere"
+})
+

@@ -1,0 +1,27 @@
+db.artigos.insertOne({
+  autor: {
+    nome: "Gabriel Ferreira",
+    descrição: "Desenvolvedor, instrutor e criador de conteúdo na CS sistemas",
+    email: "gabs@caelum.com",
+    senha: "gabs1234"
+  },
+  slug: "projeto-caelum-nasfaculdades",
+  titulo: "Projeto Caelum nas Faculdades",
+  conteudo:
+    "Por enquanto nós estamos indo apenas até a faculdade de São Paulo e cidades próximas, mas nós podemos agendar uma paletra remota! Podemos agendar uma paletras remota! Podemos fazer via skype ou Hangouts, como eu já fiz com o pessoal da UNIFEOB ",
+  dataCriado: ISODate("2019-06-04"),
+});
+
+
+db.artigos.find({"slug":"projeto-caelum-nasfaculdades"})
+
+
+db.artigos.update(
+{"slug":"projeto-caelum-nasfaculdades"},
+{
+    $set:{
+        "slug":"projeto-caelum-nas-faculdades"
+    }
+},{multi:true}
+
+)

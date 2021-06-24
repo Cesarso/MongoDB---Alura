@@ -1,0 +1,18 @@
+db.autores.update(
+  {
+    nome: "Cesar Soares ",
+  },
+  {
+    $set: {
+      artigos: [
+        {
+          slug: "projeto-caelum-nasfaculdades",
+          titulo: "Projeto Caelum nas Faculdades",
+          conteudo:
+            "Por enquanto nós estamos indo apenas até a faculdade de São Paulo e cidades próximas, mas nós podemos agendar uma paletra remota! Podemos agendar uma paletras remota! Podemos fazer via skype ou Hangouts, como eu já fiz com o pessoal da UNIFEOB ",
+          dataCriado: ISODate("2019-06-04"),
+        }
+      ]
+    }
+  }
+)
